@@ -6,7 +6,7 @@
 /*   By: bguyot <bguyot@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 14:20:18 by bguyot            #+#    #+#             */
-/*   Updated: 2021/11/15 17:40:28 by bguyot           ###   ########.fr       */
+/*   Updated: 2021/11/15 17:53:10 by bguyot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_hex_data(void *addr, unsigned int i, unsigned int size)
 	while (j < 16 && ((char *)addr)[i + j] && i + j < size)
 	{
 		print_dec_to_hex(((char *)addr)[i + j], 2);
-		if(j % 2)
+		if (j % 2)
 			write(1, " ", 1);
 		j++;
 	}
@@ -81,7 +81,7 @@ void	print_rbl_data(void *addr, unsigned int i, unsigned int size)
 
 void	print_dec_to_hex(int nbr, int size)
 {
-	char *base;
+	char	*base;
 
 	base = "0123456789abcdef";
 	if (size > 0)
