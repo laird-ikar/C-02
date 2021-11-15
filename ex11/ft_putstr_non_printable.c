@@ -6,44 +6,33 @@
 /*   By: bguyot <bguyot@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 13:19:14 by bguyot            #+#    #+#             */
-/*   Updated: 2021/11/14 16:51:58 by bguyot           ###   ########.fr       */
+/*   Updated: 2021/11/15 17:45:35 by bguyot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
 
 void	ft_putstr_non_printable(char *str);
-void	write_hex(char c);
 
 void	ft_putstr_non_printable(char *str)
 {
 	int		i;
-	char	c;
+	int		spot;
+	char	*base;
 
+	base = "0123456789abcdef";
 	i = 0;
 	while (str[i])
 	{
-		c = str[i];
 		if (str[i] >= ' ' && str[i] <= '~')
-			write(1, &c, 1);
+			write(1, &str[i], 1);
 		else
 		{
-			write_hex(c);
+			write(1, "\\", 1);
+			spot = str[i] / 16;
+			write(1, &base[spot], 1);
+			spot = str[i] % 16;
+			write(1, &base[spot], 1);
 		}
 		i++;
 	}
-}
-
-void	write_hex(char c)
-{
-	char	to_print;
-
-	write(1, "\\", 1);
-	to_print = c / 16 + '0';
-	if (to_print > '9')
-		to_print += 'a' - '0' - 10;
-	write(1, &to_print, 1);
-	to_print = c % 16 + '0';
-	if (to_print > '9')
-		to_print += 'a' - '0' - 10;
-	write(1, &to_print, 1);
 }
